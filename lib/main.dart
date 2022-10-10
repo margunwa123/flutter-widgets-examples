@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_route_animation/atomic/chip.dart';
 import 'package:page_route_animation/layouts/limited_box.dart';
 import 'package:page_route_animation/layouts/transform.dart';
 import 'package:page_route_animation/layouts/two_column_list.dart';
@@ -9,7 +10,7 @@ import 'layouts/fitted_box.dart';
 void main() {
   runApp(
     MaterialApp(
-      home: const TwoColumnListApp()
+      home: const ChipApp()
     )
   );
 }
