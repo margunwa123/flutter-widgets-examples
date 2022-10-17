@@ -32,6 +32,9 @@ dependencies:
   # making request to the web
   http:
 
+  bloc: 
+  flutter_bloc: 
+
   flutter:
     sdk: flutter
 

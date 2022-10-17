@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:page_route_animation/bloc/counter_bloc.dart';
+import 'package:page_route_animation/bloc/multi_bloc.dart';
 import 'package:page_route_animation/effects/nested_navigation.dart';
 
 import 'layouts/fitted_box.dart';
 
 void main() {
-  runApp(
-    MaterialApp(
-      home: const NestedMaterialApp()
-    )
-  );
+  runApp(MultiBlocApp());
 }
 
 class PageOne extends StatelessWidget {
@@ -20,28 +18,30 @@ class PageOne extends StatelessWidget {
       appBar: AppBar(
         title: const Text("asds"),
       ),
-      body: Center(child: ElevatedButton(
+      body: Center(
+          child: ElevatedButton(
         onPressed: () => Navigator.of(context).push(_createRoute()),
         child: const Text("Go"),
-      )), 
+      )),
     );
   }
 }
 
 Route _createRoute() {
   return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => const PageTwo(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(0.0, 1.0);
-      const end = Offset.zero;
-      const curve = Curves.easeOut;
-      
-      final tween = Tween(begin: begin, end: end);
-      final curvedAnimation = CurvedAnimation(parent: animation, curve: curve);
+      pageBuilder: (context, animation, secondaryAnimation) => const PageTwo(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.easeOut;
 
-      return SlideTransition(position: tween.animate(curvedAnimation), child: child);
-    }
-  );
+        final tween = Tween(begin: begin, end: end);
+        final curvedAnimation =
+            CurvedAnimation(parent: animation, curve: curve);
+
+        return SlideTransition(
+            position: tween.animate(curvedAnimation), child: child);
+      });
 }
 
 class PageTwo extends StatelessWidget {
@@ -50,10 +50,7 @@ class PageTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Duar pagetwo")
-      ),
-      body: const Center(child: Text("Hello from pagetwo"))
-    );
+        appBar: AppBar(title: const Text("Duar pagetwo")),
+        body: const Center(child: Text("Hello from pagetwo")));
   }
 }
