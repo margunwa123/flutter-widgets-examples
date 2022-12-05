@@ -3,25 +3,25 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:page_route_animation/testing/todolist.dart';
 
 void main() {
-    testWidgets("Add a todo then removes it", (widgetTester) async {
-      final text = 'tunak uwah';
+  testWidgets("Add a todo then removes it", (widgetTester) async {
+    final text = 'test';
 
-      await widgetTester.pumpWidget(const Todolist());
+    await widgetTester.pumpWidget(const Todolist());
 
-      final textField = find.byType(TextField);
-      final button = find.byType(FloatingActionButton);
+    final textField = find.byType(TextField);
+    final button = find.byType(FloatingActionButton);
 
-      await widgetTester.enterText(textField, text);
-      await widgetTester.tap(button);
+    await widgetTester.enterText(textField, text);
+    await widgetTester.tap(button);
 
-      await widgetTester.pump();
+    await widgetTester.pump();
 
-      final todo = find.text(text);
-      expect(todo, findsOneWidget);
+    final todo = find.text(text);
+    expect(todo, findsOneWidget);
 
-      await widgetTester.drag(find.byType(Dismissible), const Offset(500.0, 0.0));
-      await widgetTester.pumpAndSettle();
+    await widgetTester.drag(find.byType(Dismissible), const Offset(500.0, 0.0));
+    await widgetTester.pumpAndSettle();
 
-      expect(find.text(text), findsNothing);
-    });
+    expect(find.text(text), findsNothing);
+  });
 }

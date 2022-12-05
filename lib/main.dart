@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:page_route_animation/bloc/counter_bloc.dart';
-import 'package:page_route_animation/bloc/multi_bloc.dart';
-import 'package:page_route_animation/effects/nested_navigation.dart';
-
-import 'layouts/fitted_box.dart';
 
 void main() {
-  runApp(MultiBlocApp());
+  runCounterBlocApp();
 }
 
 class PageOne extends StatelessWidget {

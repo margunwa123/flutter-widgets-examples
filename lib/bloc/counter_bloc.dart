@@ -8,7 +8,6 @@ class CounterIncrementEvent extends CounterEvent {}
 class CounterBloc extends Bloc<CounterEvent, int> {
   CounterBloc() : super(0) {
     on<CounterIncrementEvent>((event, emit) {
-      print(state);
       emit(state + 1);
     });
   }
@@ -26,7 +25,7 @@ void runCounterBlocApp() {
   runApp(MaterialApp(
     home: BlocProvider(
       create: (ctx) => CounterBloc(),
-      child: const CounterBlocApp(),
+      child: const CounterBlocApp(), //scaffoldnya
     ),
   ));
 }

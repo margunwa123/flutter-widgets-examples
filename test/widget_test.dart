@@ -2,14 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:page_route_animation/testing/widget.dart';
 
 void main() {
-  group('Home Test', () { 
+  group('Home Test', () {
     testWidgets('Check if text is there', (widgetTester) async {
-      final text = 'hello world';
-      final title = 'hola globe';
+      const text = 'hello world';
+      const title = 'hola globe';
 
-      await widgetTester.pumpWidget(
-        WidgetApp(title: title, text: text)
-      );
+      await widgetTester.pumpWidget(const WidgetApp(title: title, text: text));
 
       final textMatcher = find.text(text);
       final titleMatcher = find.text(text);
