@@ -32,29 +32,28 @@ dependencies:
   # making request to the web
   http:
 
-  bloc: 
-  flutter_bloc: 
+  bloc:
+  flutter_bloc:
 
   flutter:
     sdk: flutter
 
   # web socket
-  web_socket_channel: 
+  web_socket_channel:
 
   sqflite:
 
   # for provider pattern
-  provider: 
-  
+  provider:
+
   # for database
   path:
-  
+
   # for read/write files
   path_provider:
-  
-  # key-value store
-  shared_preferences: 
 
+  # key-value store
+  shared_preferences:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -62,7 +61,7 @@ dependencies:
 
 dev_dependencies:
   mockito:
-  build_runner: 
+  build_runner:
   test:
   integration_test:
     sdk: flutter
@@ -81,7 +80,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
