@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:page_route_animation/bloc/counter_bloc.dart';
+import 'package:page_route_animation/overlay/composite_transform_target_app.dart';
 
 void main() {
-  runCounterBlocApp();
+  runApp(const MaterialApp(
+    home: CompositeTransformTargetApp(),
+  ));
 }
 
 class PageOne extends StatelessWidget {
