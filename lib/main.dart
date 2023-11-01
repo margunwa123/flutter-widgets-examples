@@ -1,54 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:page_route_animation/overlay/custom_select_button.dart';
+import 'package:page_route_animation/others/banner_gojek/banner_list_widget.dart';
+import 'package:page_route_animation/others/scanner_nudge_doubts/constants.dart';
+import 'package:page_route_animation/others/scanner_nudge_doubts/scanner_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final sharedPref = await SharedPreferences.getInstance();
+  if (sharedPref.getInt(chosenOne) == null) {
+    sharedPref.setInt(chosenOne, 2);
+    sharedPref.setInt(notChosenOne, 30);
+  }
+
   runApp(const MaterialApp(
-    home: CustomSelectButtonApp(),
+    home: ScannerPage(),
   ));
 }
 
-class PageOne extends StatelessWidget {
-  const PageOne({super.key});
+class NewWidget extends StatefulWidget {
+  const NewWidget({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("asds"),
-      ),
-      body: Center(
-          child: ElevatedButton(
-        onPressed: () => Navigator.of(context).push(_createRoute()),
-        child: const Text("Go"),
-      )),
-    );
+  State<NewWidget> createState() => _NewWidgetState();
+}
+
+class _NewWidgetState extends State<NewWidget> {
+  final secondKey = GlobalKey();
+  final thirdKey = GlobalKey();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
-}
-
-Route _createRoute() {
-  return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => const PageTwo(),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(0.0, 1.0);
-        const end = Offset.zero;
-        const curve = Curves.easeOut;
-
-        final tween = Tween(begin: begin, end: end);
-        final curvedAnimation =
-            CurvedAnimation(parent: animation, curve: curve);
-
-        return SlideTransition(
-            position: tween.animate(curvedAnimation), child: child);
-      });
-}
-
-class PageTwo extends StatelessWidget {
-  const PageTwo({super.key});
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.height);
+
     return Scaffold(
-        appBar: AppBar(title: const Text("Duar pagetwo")),
-        body: const Center(child: Text("Hello from pagetwo")));
+      backgroundColor: Colors.green,
+      body: Column(
+        children: const [
+          BannerListWidget(),
+        ],
+      ),
+    );
   }
 }
