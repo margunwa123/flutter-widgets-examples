@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:page_route_animation/animation/sliding_widget.dart';
 import 'package:page_route_animation/others/banner_gojek/banner_list_widget.dart';
 import 'package:page_route_animation/others/scanner_nudge_doubts/constants.dart';
-import 'package:page_route_animation/others/scanner_nudge_doubts/scanner_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -14,7 +14,7 @@ void main() async {
   }
 
   runApp(const MaterialApp(
-    home: ScannerPage(),
+    home: PeriodicSlidingPage(),
   ));
 }
 
