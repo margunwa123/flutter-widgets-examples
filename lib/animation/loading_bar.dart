@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum SplitBillStatus {
+enum LoadingStatus {
   idle,
   uploading,
   scanning,
@@ -16,7 +16,7 @@ class LoadingBarPage extends StatefulWidget {
 }
 
 class _LoadingBarPageState extends State<LoadingBarPage> {
-  SplitBillStatus status = SplitBillStatus.idle;
+  LoadingStatus status = LoadingStatus.idle;
 
   @override
   void initState() {
@@ -26,18 +26,18 @@ class _LoadingBarPageState extends State<LoadingBarPage> {
 
   Future<void> _progressUpload() async {
     await _progressTo(
-        SplitBillStatus.uploading, const Duration(milliseconds: 100));
+        LoadingStatus.uploading, const Duration(milliseconds: 100));
     await _progressTo(
-      SplitBillStatus.scanning,
+      LoadingStatus.scanning,
       const Duration(milliseconds: 1000),
     );
     await _progressTo(
-      SplitBillStatus.completed,
+      LoadingStatus.completed,
       const Duration(milliseconds: 2000),
     );
   }
 
-  Future<void> _progressTo(SplitBillStatus status, Duration duration) async {
+  Future<void> _progressTo(LoadingStatus status, Duration duration) async {
     await Future.delayed(duration);
     setState(() {
       this.status = status;
@@ -60,44 +60,44 @@ class LoadingBar extends StatelessWidget {
     required this.onCompleted,
   });
 
-  final SplitBillStatus status;
+  final LoadingStatus status;
   final void Function() onCompleted;
 
   double get _progress {
     switch (status) {
-      case SplitBillStatus.completed:
+      case LoadingStatus.completed:
         return 1;
-      case SplitBillStatus.idle:
+      case LoadingStatus.idle:
         return 0;
-      case SplitBillStatus.scanning:
+      case LoadingStatus.scanning:
         return 0.90;
-      case SplitBillStatus.uploading:
+      case LoadingStatus.uploading:
         return 0.25;
     }
   }
 
   Duration get _animationDuration {
     switch (status) {
-      case SplitBillStatus.completed:
+      case LoadingStatus.completed:
         return const Duration(seconds: 1);
-      case SplitBillStatus.idle:
+      case LoadingStatus.idle:
         return Duration.zero;
-      case SplitBillStatus.scanning:
+      case LoadingStatus.scanning:
         return const Duration(seconds: 3);
-      case SplitBillStatus.uploading:
+      case LoadingStatus.uploading:
         return const Duration(seconds: 1);
     }
   }
 
   String get _textState {
     switch (status) {
-      case SplitBillStatus.completed:
+      case LoadingStatus.completed:
         return "Completed";
-      case SplitBillStatus.idle:
+      case LoadingStatus.idle:
         return "";
-      case SplitBillStatus.scanning:
+      case LoadingStatus.scanning:
         return "Scanning";
-      case SplitBillStatus.uploading:
+      case LoadingStatus.uploading:
         return "Uploading";
     }
   }
