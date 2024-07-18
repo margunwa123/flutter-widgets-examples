@@ -1,4 +1,7 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
+import 'package:page_route_animation/utils/hextocolor.dart';
 
 class AnimationUpAndDownApp extends StatefulWidget {
   const AnimationUpAndDownApp({super.key, required this.shrinkingStartHeight});
@@ -11,8 +14,8 @@ class AnimationUpAndDownApp extends StatefulWidget {
 
 const containerHeight = 360.0;
 const containerWidth = 253.0;
-const double yellowScannerHeight = 200;
-const shrinkDuration = Duration(milliseconds: 2000);
+const double yellowScannerHeight = 100;
+const shrinkDuration = Duration(milliseconds: 700);
 const bounceDuration = Duration(milliseconds: 2000);
 
 class _AnimationUpAndDownState extends State<AnimationUpAndDownApp>
@@ -28,9 +31,13 @@ class _AnimationUpAndDownState extends State<AnimationUpAndDownApp>
       duration: shrinkDuration,
     );
     _backgroundAnimation =
-        ColorTween(begin: Colors.black, end: Colors.purple).animate(
+        ColorTween(begin: Colors.black, end: "#00AED6".hexToColor()).animate(
       _controller,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _controller.forward();
+    });
   }
 
   @override
@@ -208,29 +215,33 @@ class __BounceAnimationWidgetState extends State<_BounceAnimationWidget> {
           children: [
             AnimatedPositioned(
               duration: bounceDuration,
+              // curve: Curves.linear,
               curve: Curves.easeInOut,
+              // top: _isForward ? containerHeight - yellowScannerHeight : 0,
               top: _isForward
                   ? containerHeight - yellowScannerHeight / 2
                   : -yellowScannerHeight / 2,
               onEnd: () => _animate(),
               left: 0,
               right: 0,
-              child: Container(
+              child: SizedBox(
                 width: double.infinity,
-                height: yellowScannerHeight,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.yellow.withOpacity(0),
-                      Colors.yellow.withOpacity(.52),
-                      Colors.yellow.withOpacity(.80),
-                      Colors.yellow.withOpacity(.52),
-                      Colors.yellow.withOpacity(0),
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                  ),
-                  color: Colors.white,
+                height: yellowScannerHeight * 2,
+                child: Column(
+                  children: [
+                    Transform.rotate(
+                      angle: math.pi,
+                      child: SizedBox(
+                        height: yellowScannerHeight,
+                        width: double.infinity,
+                        child: imageAsset,
+                      ),
+                    ),
+                    SizedBox(
+                        height: yellowScannerHeight,
+                        width: double.infinity,
+                        child: imageAsset),
+                  ],
                 ),
               ),
             ),
@@ -239,4 +250,23 @@ class __BounceAnimationWidgetState extends State<_BounceAnimationWidget> {
       ),
     );
   }
+
+  get imageAsset => ShaderMask(
+        shaderCallback: (rect) {
+          return const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(200, 227, 204, 204),
+              Color.fromARGB(0, 227, 204, 204),
+            ],
+          ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
+        },
+        blendMode: BlendMode.dstIn,
+        child: Image.asset(
+          'assets/line.png',
+          height: yellowScannerHeight,
+          repeat: ImageRepeat.repeatX,
+        ),
+      );
 }

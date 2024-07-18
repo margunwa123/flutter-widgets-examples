@@ -18,6 +18,7 @@ dependencies:
   web_socket_channel:
   sqflite:
   provider:
+  flutter_svg: ^1.0.0
   path:
   path_provider:
   shared_preferences:
@@ -47,6 +48,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/line.png
     - assets/scanner_nudge_master.json
     - assets/configs/scanner_nudge_chosen_one.json
     - assets/configs/scanner_nudge_fake.json

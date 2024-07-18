@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../layouts/fitted_box.dart';
 
@@ -36,7 +34,7 @@ class ChipApp extends StatelessWidget {
               )
             ),
             Chip(
-              padding: EdgeInsets.fromLTRB(2, 8, 2, 8),
+              padding: const EdgeInsets.fromLTRB(2, 8, 2, 8),
               label: RichText(
                 text: const TextSpan(
                   children: [
@@ -54,7 +52,7 @@ class ChipApp extends StatelessWidget {
               ), 
               backgroundColor: const Color.fromARGB(255, 79,78,79),
               side: BorderSide.none,
-              shape: BeveledRectangleBorder(
+              shape: const BeveledRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(3))
               ),
             ),
